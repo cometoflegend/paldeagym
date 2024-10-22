@@ -1,6 +1,8 @@
 package cifp.p13.dto;
 
-public class Entrenador {
+import java.io.Serializable;
+
+public class Entrenador implements Serializable {
 
     private long id;
     private String nombre;

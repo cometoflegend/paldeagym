@@ -3,6 +3,7 @@ package cifp.p13;
 import cifp.p13.dto.Perfil;
 import cifp.p13.dto.Sesion;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import static cifp.p13.logic.LogicaInvitado.nuevoEntrenador;
@@ -11,7 +12,7 @@ public class Main {
 
     static Sesion sesion=new Sesion();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         sesion.setPerfil(Perfil.INVITADO);
         int opcion=-1;

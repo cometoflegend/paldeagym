@@ -1,8 +1,9 @@
 package cifp.p13.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Carnet {
+public class Carnet implements Serializable {
 
     private long idEntrenador;
     private LocalDate fechaExpedicion;

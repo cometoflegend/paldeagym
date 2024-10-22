@@ -3,13 +3,15 @@ package cifp.p13.logic;
 import cifp.p13.dto.Carnet;
 import cifp.p13.dto.Entrenador;
 import cifp.p13.dto.LoginCreds;
+import cifp.p13.dto.Sesion;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class LogicaInvitado {
 
-    public static boolean nuevoEntrenador() {
+    public static boolean nuevoEntrenador() throws IOException {
 
         String nom;
         String nacionalidad;
@@ -23,7 +25,18 @@ public class LogicaInvitado {
 
         Entrenador nuevo = new Entrenador();
         Carnet nuevoC = new Carnet();
-        LoginCreds nuevoL = new LoginCreds();
+
+        File fichEntrenador = new File("./src/main/java/cifp/p13/datafiles/entrenadores.dat");
+        FileOutputStream fishEntrenador=new FileOutputStream(fichEntrenador,true);
+        ObjectOutputStream oosEntrenador=new ObjectOutputStream(fishEntrenador);
+
+        File fichCarnet = new File("./src/main/java/cifp/p13/datafiles/carnets.dat");
+        FileOutputStream fishCarnet=new FileOutputStream(fichEntrenador,true);
+        ObjectOutputStream oosCarnet=new ObjectOutputStream(fishEntrenador);
+
+        File fichLogin = new File("./src/main/java/cifp/p13/datafiles/credenciales.txt");
+        FileOutputStream fishLogin=new FileOutputStream(fichEntrenador,true);
+        ObjectOutputStream oosLogin=new ObjectOutputStream(fishEntrenador);
 
 
         Scanner t=new Scanner(System.in);
@@ -43,7 +56,7 @@ public class LogicaInvitado {
 
         } while (check=="N");
 
-        Long idEntrenador=calcID();
+        Long idEntrenador= 1L;
         nuevo.setId(idEntrenador);
         nuevo.setNombre(nom);
         nuevo.setNacionalidad(nacionalidad);
@@ -71,12 +84,17 @@ public class LogicaInvitado {
 
         } while (check=="N");
 
-        nuevoL.setUn(un);
-        nuevoL.setPw(pw);
+        /* nuevoL.setUn(un);
+        nuevoL.setPw(pw); */
 
         // añadir los datos a los ficheros para credenciales, carnet y entrenador
 
-        return false;
+        System.out.println("Guardando datos...");
+        oosEntrenador.writeObject(nuevo);
+        oosCarnet.writeObject(nuevoC);
+        System.out.println("¡Sus datos han sido guardados! Si encuentra algún error referente a su información, por favor contacte con su gimnasio de preferencia.");
+
+        return true;
 
     }
 
