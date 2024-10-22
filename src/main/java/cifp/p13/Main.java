@@ -12,7 +12,7 @@ public class Main {
 
     static Sesion sesion=new Sesion();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         sesion.setPerfil(Perfil.INVITADO);
         int opcion=-1;

@@ -1,9 +1,6 @@
 package cifp.p13.logic;
 
-import cifp.p13.dto.Carnet;
-import cifp.p13.dto.Entrenador;
-import cifp.p13.dto.LoginCreds;
-import cifp.p13.dto.Sesion;
+import cifp.p13.dto.*;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -11,7 +8,9 @@ import java.util.Scanner;
 
 public class LogicaInvitado {
 
-    public static boolean nuevoEntrenador() throws IOException {
+    static Sesion sesion=new Sesion();
+
+    public static boolean nuevoEntrenador() throws IOException, ClassNotFoundException {
 
         String nom;
         String nacionalidad;
@@ -34,9 +33,9 @@ public class LogicaInvitado {
         FileOutputStream fishCarnet=new FileOutputStream(fichCarnet,true);
         ObjectOutputStream oosCarnet=new ObjectOutputStream(fishCarnet);
 
-        File fichLogin = new File("./src/main/java/cifp/p13/datafiles/credenciales.txt");
+        /* File fichLogin = new File("./src/main/java/cifp/p13/datafiles/credenciales.txt");
         FileOutputStream fishLogin=new FileOutputStream(fichEntrenador,true);
-        ObjectOutputStream oosLogin=new ObjectOutputStream(fishEntrenador);
+        ObjectOutputStream oosLogin=new ObjectOutputStream(fishEntrenador); */
 
 
         Scanner t=new Scanner(System.in);
@@ -99,9 +98,60 @@ public class LogicaInvitado {
 
     }
 
-    private static Long calcID() {
-        // TODO Auto-generated method stub
-        return null;
+
+    public static boolean login() throws IOException {
+
+        String un;
+        String pw;
+
+        boolean logged=false;
+
+        String read = "";
+        FileReader log = new FileReader("./src/main/java/cifp/p13/datafiles/credenciales.txt");
+        BufferedReader br = new BufferedReader(log);
+
+        Scanner t=new Scanner(System.in);
+
+        do {
+            System.out.println("Introduzca el nombre de usuario.");
+            un=t.next();
+
+            System.out.println("Introduzca la contraseña.");
+            pw=t.next();
+
+            // comprobar si los datos son correctos
+
+            String[]espacio=read.split("\\s");
+
+            while ((read=br.readLine())!=null) {
+
+                if(un.equals(espacio[0])&&(pw.equals(espacio[1]))) {
+
+                    sesion.setPerfil(Perfil.valueOf(espacio[2]));
+                    logged=true;
+
+                }
+
+            }
+
+
+        } while (logged=false);
+
+        return true;
+
+    }
+
+
+    private static Long calcID() throws IOException, ClassNotFoundException {
+        File fichEntrenador = new File("./src/main/java/cifp/p13/datafiles/entrenadores.dat");
+        FileInputStream fish = new FileInputStream(fichEntrenador);
+        ObjectInputStream ois = new ObjectInputStream(fish);
+
+        Long last = 0L;
+
+        //extraer el último long
+
+        return last+1;
     }
 
 }
