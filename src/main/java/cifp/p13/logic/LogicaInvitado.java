@@ -56,7 +56,7 @@ public class LogicaInvitado {
 
         } while (check=="N");
 
-        Long idEntrenador= 1L;
+        Long idEntrenador=calcID();
         nuevo.setId(idEntrenador);
         nuevo.setNombre(nom);
         nuevo.setNacionalidad(nacionalidad);
@@ -92,6 +92,7 @@ public class LogicaInvitado {
         System.out.println("Guardando datos...");
         oosEntrenador.writeObject(nuevo);
         oosCarnet.writeObject(nuevoC);
+        // implementar escritura a credenciales.txt
         System.out.println("¡Sus datos han sido guardados! Si encuentra algún error referente a su información, por favor contacte con su gimnasio de preferencia.");
 
         return true;
