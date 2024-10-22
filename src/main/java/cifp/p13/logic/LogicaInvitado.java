@@ -31,8 +31,8 @@ public class LogicaInvitado {
         ObjectOutputStream oosEntrenador=new ObjectOutputStream(fishEntrenador);
 
         File fichCarnet = new File("./src/main/java/cifp/p13/datafiles/carnets.dat");
-        FileOutputStream fishCarnet=new FileOutputStream(fichEntrenador,true);
-        ObjectOutputStream oosCarnet=new ObjectOutputStream(fishEntrenador);
+        FileOutputStream fishCarnet=new FileOutputStream(fichCarnet,true);
+        ObjectOutputStream oosCarnet=new ObjectOutputStream(fishCarnet);
 
         File fichLogin = new File("./src/main/java/cifp/p13/datafiles/credenciales.txt");
         FileOutputStream fishLogin=new FileOutputStream(fichEntrenador,true);
@@ -56,7 +56,7 @@ public class LogicaInvitado {
 
         } while (check=="N");
 
-        Long idEntrenador=calcID();
+        Long idEntrenador=calcID(); //cambiar calcID a 1L para testeo de registro de datos mientras que no se codee calcID
         nuevo.setId(idEntrenador);
         nuevo.setNombre(nom);
         nuevo.setNacionalidad(nacionalidad);
