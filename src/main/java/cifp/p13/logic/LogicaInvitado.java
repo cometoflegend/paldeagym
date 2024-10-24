@@ -41,6 +41,7 @@ public class LogicaInvitado {
         Scanner t=new Scanner(System.in);
 
         do {
+
             System.out.println("Introduzca el nombre del entrenador.");
             nom=t.next();
 

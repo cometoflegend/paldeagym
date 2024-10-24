@@ -6,19 +6,31 @@ import cifp.p13.dto.Sesion;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static cifp.p13.dto.Perfil.*;
+import static cifp.p13.logic.LogicaInvitado.login;
 import static cifp.p13.logic.LogicaInvitado.nuevoEntrenador;
 
 public class Main {
 
-    static Sesion sesion=new Sesion();
+    private static Sesion sesion = new Sesion();
+    Scanner s=new Scanner(System.in);
+
+    // método para inicializar variables
+    private static void initVariables() {
+        sesion.setPerfil(INVITADO);
+
+    }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        sesion.setPerfil(Perfil.INVITADO);
-        int opcion=-1;
-        boolean salir = false;
+        initVariables();
+        mensajeInicial();
+        mostrarMenu();
 
-        Scanner s=new Scanner(System.in);
+    }
+
+
+    private static void mensajeInicial() {
 
         System.out.println("\n" +
                 "\n" +
@@ -30,50 +42,55 @@ public class Main {
                 "\n");
         System.out.println("Bienvenido al sistema de combates de gimnasios Pokémon de Paldea.");
 
+    }
+
+    private static void mostrarMenu() throws IOException, ClassNotFoundException {
+
+        Scanner s=new Scanner(System.in);
+        boolean salir = false;
+
         do {
 
-            mostrarMenu();
-            opcion=s.nextInt();
-            salir=opcion==0;
+            System.out.println("Introduzca su opción:");
 
-            switch (opcion) {
+            switch(sesion.getPerfil()) {
 
-                case 1: nuevoEntrenador();break;
+                case INVITADO:
+                    System.out.println("1. Registrarse como nuevo entrenador");
+                    System.out.println("2. Iniciar sesión");
+                    int opcion=s.nextInt();
+
+                    switch (opcion) {
+
+                        case 1: nuevoEntrenador();break;
+                        case 2: login();break;
+
+                    }
+                    break;
+
+                case ENTRENADOR:
+                    System.out.println("A implementar");
+                    opcion=s.nextInt();
+                    break;
+
+                case TORNADMIN:
+                    System.out.println("A implementar");
+                    opcion=s.nextInt();
+                    break;
+
+                case SYSADMIN:
+                    System.out.println("A implementar");
+                    opcion=s.nextInt();
+                    break;
 
             }
+
+            System.out.println("Pulse 0 para salir.");
 
         } while (!salir);
 
         s.close();
 
-    }
-
-    private static void mostrarMenu() {
-
-        System.out.println("Introduzca su opción:");
-
-        switch(sesion.getPerfil()) {
-
-            case INVITADO:
-                System.out.println("1. Registrarse como nuevo entrenador");
-                System.out.println("2. Iniciar sesión");
-                break;
-
-            case ENTRENADOR:
-                System.out.println("A implementar");
-                break;
-
-            case TORNADMIN:
-                System.out.println("A implementar");
-                break;
-
-            case SYSADMIN:
-                System.out.println("A implementar");
-                break;
-
-        }
-
-        System.out.println("Pulse 0 para salir.");
 
     }
 }
